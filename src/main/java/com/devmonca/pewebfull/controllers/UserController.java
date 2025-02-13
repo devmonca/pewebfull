@@ -4,14 +4,13 @@ import com.devmonca.pewebfull.entities.User;
 import com.devmonca.pewebfull.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.StreamingHttpOutputMessage;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/users")
 public class UserController {
 
     @Autowired
@@ -21,5 +20,24 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> findAll(){
         return ResponseEntity.status(200).body(userService.findAll());
+    }
+
+    // Criar usuario
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody User user){
+        return ResponseEntity.status(200).body(userService.createUser(user));
+    }
+
+    // Editar usuário
+    @PutMapping
+    public ResponseEntity<User> editUser(@RequestBody User user){
+        return ResponseEntity.status(201).body(userService.editUser(user));
+    }
+
+    // Deletar usuario
+    @DeleteMapping(value= "/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Integer id){
+        userService.deleteUser(id);
+        return ResponseEntity.status(200).build();
     }
 }
