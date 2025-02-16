@@ -1,9 +1,7 @@
 package com.devmonca.pewebfull.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.Objects;
@@ -11,7 +9,8 @@ import java.util.Objects;
 @Data
 @Getter
 @Setter
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "app_user")
 public class User {
@@ -20,33 +19,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "email", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "email", columnDefinition = "TEXT")
     private String email;
 
-    @Column(name = "senha",length = 200, nullable = false)
+    @Column(name = "senha",length = 200)
     private String senha;
 
-    @Column(name = "nome",length = 200, nullable = false)
+    @Column(name = "nome",length = 200)
     private String nome;
 
-    @Column(name = "data_de_nascimento", nullable = false)
-    private Date nascimento;
-
-    @Column(name = "telefone",length = 200, nullable = false)
-    private String telefone;
-
-    public User(){
-
-    }
-
-    public User(Integer id, String email, String senha, String nome, Date nascimento, String telefone) {
-        this.id = id;
-        this.email = email;
-        this.senha = senha;
-        this.nome = nome;
-        this.nascimento = nascimento;
-        this.telefone = telefone;
-    }
 
     @Override
     public boolean equals(Object o) {
